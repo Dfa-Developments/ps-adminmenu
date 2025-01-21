@@ -93,9 +93,9 @@ Make sure you've correctly configured player permissions in your server.cfg by u
 
 ### Player Permission
 ```
-add_principal identifier.fivem:565139 qbcore.god # MonkeyWhisper
-add_principal identifier.fivem:565139 qbcore.admin # MonkeyWhisper
-add_principal identifier.fivem:565139 qbcore.mod # MonkeyWhisper
+add_principal identifier.fivem:565139 rsgcore.god # MonkeyWhisper
+add_principal identifier.fivem:565139 rsgcore.admin # MonkeyWhisper
+add_principal identifier.fivem:565139 rsgcore.mod # MonkeyWhisper
 ```
 
 
