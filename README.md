@@ -1,8 +1,6 @@
-# ps-adminmenu
+# ps-adminmenu For RsgCore Redm Convertred by DFA-Developments
 The Admin Menu crafted by [OK1ez](https://github.com/OK1ez) and our dedicated team is user-friendly and intuitive. We invite you to contribute by submitting new features through PRs. We're always eager to review and consider new features. Make sure you use our template when opening Issues or they will be auto closed.
 
-## Unofficial ESX Version
-Made by Avilchiis for the community, you can download it [here](https://github.com/avilchiis/ps-adminmenu). **WE DO NOT PROVIDE SUPPORT FOR ESX VERSION, DO NOT ASK YOU'LL BE IGNORED.**
 
 # Preview
 <img src="https://github.com/Project-Sloth/ps-adminmenu/assets/82112471/0da6cf4d-fc72-497f-a59c-08011b3785ab" width="300">
