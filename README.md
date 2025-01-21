@@ -8,7 +8,6 @@ The Admin Menu crafted by [OK1ez](https://github.com/OK1ez) and our dedicated te
 <img src="https://github.com/Project-Sloth/ps-adminmenu/assets/82112471/33382d64-3b95-42aa-9659-d92dbdca94d2" width="600">
 <img src="https://github.com/Project-Sloth/ps-adminmenu/assets/82112471/d63982c6-9b04-4dec-b059-55e1cc5ea608" width="600">
 <img src="https://github.com/Project-Sloth/ps-adminmenu/assets/82112471/ab44df15-7d9e-4753-9c71-2492348a229d" width="600">
-<img src="https://github.com/Project-Sloth/ps-adminmenu/assets/82112471/0fb81425-dd45-4354-8fb7-94e62ac954ae" width="600">
 <img src="https://github.com/Project-Sloth/ps-adminmenu/assets/82112471/6f1d0ea9-ea55-4088-98de-ceb4fb1c3838"  width="600">
 
 # Change Language.
