@@ -105,8 +105,6 @@ add_principal identifier.fivem:565139 qbcore.mod # MonkeyWhisper
 `['ps-adminmenu'] = 'discord webhook'`
 3. Replace the place holder with your webhook link.
 
-# To Do
-* Rework the blips/names
 
 # Credits
 * [OK1ez](https://github.com/OK1ez)
