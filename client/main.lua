@@ -1,10 +1,10 @@
-QBCore = exports['qb-core']:GetCoreObject()
+RSGCore = exports['rsg-core']:GetCoreObject()
 PlayerData = {}
 
 -- Functions
 local function setupMenu()
 	Wait(500)
-	PlayerData = QBCore.Functions.GetPlayerData()
+	PlayerData = RSGCore.Functions.GetPlayerData()
 	local resources = lib.callback.await('ps-adminmenu:callback:GetResources', false)
 	local commands = lib.callback.await('ps-adminmenu:callback:GetCommands', false)
 	GetData()
@@ -20,7 +20,7 @@ local function setupMenu()
 end
 
 -- Event Handlers
-AddEventHandler("QBCore:Client:OnPlayerLoaded", function()
+AddEventHandler("RSGCore:Client:OnPlayerLoaded", function()
 	setupMenu()
 end)
 

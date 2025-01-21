@@ -49,5 +49,5 @@ end
 --- @param title string
 --- @param message string
 function Log(title, message)
-	TriggerServerEvent("qb-log:server:CreateLog", "ps-adminmenu", title, "red", message)
+	TriggerServerEvent("rsg-log:server:CreateLog", "ps-adminmenu", title, "red", message)
 end

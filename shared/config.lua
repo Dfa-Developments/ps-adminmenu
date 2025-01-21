@@ -1,23 +1,42 @@
 Config = Config or {}
 
-Config.Fuel = "ps-fuel"        -- "ps-fuel", "LegacyFuel", "ox_fuel"
 Config.ResourcePerms = 'admin' -- permission to control resource(start stop restart)
 Config.ShowCommandsPerms = 'admin' -- permission to show all commands
-Config.RenewedPhone = false    -- if you use qb-phone from renewed. (multijob)
 
 -- Key Bindings
 Config.Keybindings = true
-Config.AdminKey = "PageDown"
-Config.NoclipKey = "PageUp"
+Config.AdminKey = 0x446258B6
+Config.NoclipKey = 0x110AD1D2
 
--- Give Car
-Config.DefaultGarage = "Alta Garage"
+-- Give Horse
+Config.AdminHorse = {
+    {
+         horsename = 'Arabian White',
+         horsehash = 'a_c_horse_arabian_white',
+    },
+    {
+         horsename = 'Missouri Foxtrotter',
+         horsehash = 'a_c_horse_missourifoxtrotter_sablechampagne',
+    },
+    {
+         horsename = 'Nokota Whiteroan',
+         horsehash = 'a_c_horse_nokota_whiteroan',
+    },
+    {
+         horsename = 'Turkoman Gold',
+         horsehash = 'a_c_horse_turkoman_gold',
+    },
+    {
+         horsename = 'Thoroughbred',
+         horsehash = 'a_c_horse_thoroughbred_reversedappleblack',
+    },
+}
 
 Config.Actions = {
     ["admin_car"] = {
-        label = "Admin Car",
+        label = "Admin Horse",
         type = "client",
-        event = "ps-adminmenu:client:Admincar",
+        event = "ps-adminmenu:client:horseoptions",
         perms = "mod",
     },
 
@@ -64,62 +83,31 @@ Config.Actions = {
                 label = "Weather",
                 option = "dropdown",
                 data = {
-                    { label = "Extrasunny", value = "Extrasunny" },
-                    { label = "Clear",      value = "Clear" },
-                    { label = "Neutral",    value = "Neutral" },
-                    { label = "Smog",       value = "Smog" },
-                    { label = "Foggy",      value = "Foggy" },
-                    { label = "Overcast",   value = "Overcast" },
-                    { label = "Clouds",     value = "Clouds" },
-                    { label = "Clearing",   value = "Clearing" },
-                    { label = "Rain",       value = "Rain" },
-                    { label = "Thunder",    value = "Thunder" },
-                    { label = "Snow",       value = "Snow" },
-                    { label = "Blizzard",   value = "Blizzard" },
-                    { label = "Snowlight",  value = "Snowlight" },
-                    { label = "Xmas",       value = "Xmas" },
-                    { label = "Halloween",  value = "Halloween" },
+                    { label = "Extrasunny", value = "sunny" },
+                    { label = "Clouds",      value = "clouds" },
+                    { label = "Overcast Dark",    value = "overcastdark" },
+                    { label = "Misty",       value = "misty" },
+                    { label = "Foggy",      value = "fog" },
+                    { label = "Overcast",   value = "overcast" },
+                    { label = "Drizzle",     value = "drizzle" },
+                    { label = "Rain",       value = "rain" },
+                    { label = "Thunder",    value = "thunder" },
+                    { label = "Thunder Strom",    value = "thunderstorm" },
+                    { label = "Hurricane",       value = "hurricane" },
+                    { label = "Shower",   value = "shower" },
                 },
             },
             { label = "Confirm", option = "button", type = "client", event = "ps-adminmenu:client:ChangeWeather" },
         },
     },
-
-    ["change_time"] = {
-        label = "Change Time",
-        perms = "mod",
-        dropdown = {
-            {
-                label = "Time Events",
-                option = "dropdown",
-                data = {
-                    { label = "Sunrise", value = "06" },
-                    { label = "Morning", value = "09" },
-                    { label = "Noon",    value = "12" },
-                    { label = "Sunset",  value = "21" },
-                    { label = "Evening", value = "22" },
-                    { label = "Night",   value = "24" },
-                },
-            },
-            { label = "Confirm", option = "button", type = "client", event = "ps-adminmenu:client:ChangeTime" },
-        },
-    },
-
-    ["change_plate"] = {
-        label = "Change Plate",
-        perms = "mod",
-        dropdown = {
-            { label = "Plate",   option = "text" },
-            { label = "Confirm", option = "button", type = "client", event = "ps-adminmenu:client:ChangePlate" },
-        },
-    },
+    
 
     ["clear_inventory"] = {
         label = "Clear Inventory",
         perms = "mod",
         dropdown = {
             { label = "Player",  option = "dropdown", data = "players" },
-            { label = "Confirm", option = "button",   type = "server", event = "ps-adminmenu:server:ClearInventory" },
+            { label = "Confirm", option = "button",   type = "client", event = "ps-adminmenu:client:ClearInventory" },
         },
     },
 
@@ -129,25 +117,6 @@ Config.Actions = {
         dropdown = {
             { label = "Citizen ID", option = "text",   data = "players" },
             { label = "Confirm",    option = "button", type = "server", event = "ps-adminmenu:server:ClearInventoryOffline" },
-        },
-    },
-
-    ["clothing_menu"] = {
-        label = "Give Clothing Menu",
-        perms = "mod",
-        dropdown = {
-            { label = "Player",  option = "dropdown", data = "players" },
-            { label = "Confirm", option = "button",   type = "server", event = "ps-adminmenu:server:ClothingMenu" },
-        },
-    },
-
-    ["set_ped"] = {
-        label = "Set Ped",
-        perms = "mod",
-        dropdown = {
-            { label = "Player",     option = "dropdown", data = "players" },
-            { label = "Ped Models", option = "dropdown", data = "pedlist" },
-            { label = "Confirm",    option = "button",   type = "server", event = "ps-adminmenu:server:setPed" },
         },
     },
 
@@ -228,18 +197,6 @@ Config.Actions = {
         perms = "mod",
     },
 
-    ["give_car"] = {
-        label = "Give Car",
-        perms = "admin",
-        dropdown = {
-            { label = "Vehicle",           option = "dropdown", data = "vehicles" },
-            { label = "Player",            option = "dropdown", data = "players" },
-            { label = "Plate (Optional)",  option = "text" },
-            { label = "Garage (Optional)", option = "text" },
-            { label = "Confirm",           option = "button",   type = "server",  event = "ps-adminmenu:server:givecar" },
-        }
-    },
-
     ["invisible"] = {
         label = "Invisible",
         type = "client",
@@ -247,24 +204,10 @@ Config.Actions = {
         perms = "mod",
     },
 
-    ["blackout"] = {
-        label = "Toggle Blackout",
-        type = "server",
-        event = "ps-adminmenu:server:ToggleBlackout",
-        perms = "mod",
-    },
-
     ["toggle_duty"] = {
         label = "Toggle Duty",
         type = "server",
-        event = "QBCore:ToggleDuty",
-        perms = "mod",
-    },
-
-    ["toggle_laser"] = {
-        label = "Toggle Laser",
-        type = "client",
-        event = "ps-adminmenu:client:ToggleLaser",
+        event = "RSGCore:ToggleDuty",
         perms = "mod",
     },
 
@@ -339,32 +282,6 @@ Config.Actions = {
         },
     },
 
-    ["open_trunk"] = {
-        label = "Open Trunk",
-        perms = "mod",
-        dropdown = {
-            { label = "Plate",   option = "text" },
-            { label = "Confirm", option = "button", type = "client", event = "ps-adminmenu:client:openTrunk" },
-        },
-    },
-
-    ["change_vehicle_state"] = {
-        label = "Set Vehicle Garage State",
-        perms = "mod",
-        dropdown = {
-            { label = "Plate",   option = "text" },
-            {
-                label = "State",
-                option = "dropdown",
-                data = {
-                    { label = "In",  value = "1" },
-                    { label = "Out", value = "0" },
-                },
-            },
-            { label = "Confirm", option = "button", type = "server", event = "ps-adminmenu:server:SetVehicleState" },
-        },
-    },
-
     ["revive_all"] = {
         label = "Revive All",
         type = "server",
@@ -385,13 +302,6 @@ Config.Actions = {
         label = "Revive Radius",
         type = "server",
         event = "ps-adminmenu:server:ReviveRadius",
-        perms = "mod",
-    },
-
-    ["refuel_vehicle"] = {
-        label = "Refuel Vehicle",
-        type = "client",
-        event = "ps-adminmenu:client:RefuelVehicle",
         perms = "mod",
     },
 
@@ -428,8 +338,12 @@ Config.Actions = {
                 option = "dropdown",
                 data = {
                     { label = "Cash",   value = "cash" },
-                    { label = "Bank",   value = "bank" },
-                    { label = "Crypto", value = "crypto" },
+                    { label = "Blood Money",   value = "bloodmoney" },
+                    { label = "Valentine Bank",   value = "valbank" },
+                    { label = "Rhodes Bank",   value = "rhobank" },
+                    { label = "BlackWater Bank",   value = "blkbank" },
+                    { label = "Armadillo Bank",   value = "armbank" },
+                    { label = "Saint Denis (Main Bank)",   value = "bank" },
                 },
             },
             { label = "Confirm", option = "button", type = "server", event = "ps-adminmenu:server:GiveMoney" },
@@ -446,8 +360,12 @@ Config.Actions = {
                 option = "dropdown",
                 data = {
                     { label = "Cash",   value = "cash" },
-                    { label = "Bank",   value = "bank" },
-                    { label = "Crypto", value = "crypto" },
+                    { label = "Blood Money",   value = "bloodmoney" },
+                    { label = "Valentine Bank",   value = "valbank" },
+                    { label = "Rhodes Bank",   value = "rhobank" },
+                    { label = "BlackWater Bank",   value = "blkbank" },
+                    { label = "Armadillo Bank",   value = "armbank" },
+                    { label = "Saint Denis (Main Bank)",   value = "bank" },
                 },
             },
             { label = "Confirm", option = "button", type = "server", event = "ps-adminmenu:server:GiveMoneyAll" },
@@ -493,31 +411,6 @@ Config.Actions = {
         },
     },
 
-    ["spawn_vehicle"] = {
-        label = "Spawn Vehicle",
-        perms = "mod",
-        dropdown = {
-            { label = "Vehicle", option = "dropdown", data = "vehicles" },
-            { label = "Confirm", option = "button",   type = "client",  event = "ps-adminmenu:client:SpawnVehicle" },
-        },
-    },
-
-    ["fix_vehicle"] = {
-        label = "Fix Vehicle",
-        type = "command",
-        event = "fix",
-        perms = "mod",
-    },
-
-    ["fix_vehicle_for"] = {
-        label = "Fix Vehicle for player",
-        perms = "mod",
-        dropdown = {
-            { label = "Player",  option = "dropdown", data = "players" },
-            { label = "Confirm", option = "button",   type = "server", event = "ps-adminmenu:server:FixVehFor" },
-        },
-    },
-
     ["spectate_player"] = {
         label = "Spectate Player",
         perms = "mod",
@@ -549,7 +442,22 @@ Config.Actions = {
         label = "Teleport to Location",
         perms = "mod",
         dropdown = {
-            { label = "Location", option = "dropdown", data = "locations" },
+            {
+                label = "Location",
+                option = "dropdown",
+                data = {
+                    { label = "VALENTINE",  value = vector3(-309.86, 788.44, 117.63) },
+                    { label = "VAN HORN", value = vector3(2973.88, 561.59, 44.43) },
+                    { label = "ANNESBURG", value = vector3(2927.31, 1326.51, 44.11) },
+                    { label = "RHODES",    value = vector3(1311.22, -1297.73, 75.94) },
+                    { label = "SAINT DENIS",     value = vector3(2603.40, -1215.81, 53.35) },
+                    { label = "BLACKWATER",   value = vector3(-800.35, -1337.08, 43.54) },
+                    { label = "STRAWBERRY",      value = vector3(-1814.13, -391.82, 161.59) },
+                    { label = "ARMADILLO",     value = vector3(-3679.53, -2612.38, -14.08) },
+                    { label = "TUMBLEWEED",     value = vector3(-5513.73, -2956.16, -1.59) },
+                    { label = "GUARMA",     value = vector3(1270.34, -6857.038, 43.168) },
+                },
+            },
             { label = "Confirm",  option = "button",   type = "client",   event = "ps-adminmenu:client:TeleportToLocation" },
         },
     },
@@ -568,24 +476,10 @@ Config.Actions = {
         perms = "mod",
     },
 
-    ["vehicle_dev"] = {
-        label = "Vehicle Dev Menu",
-        type = "client",
-        event = "ps-adminmenu:client:ToggleVehDevMenu",
-        perms = "mod",
-    },
-
     ["toggle_coords"] = {
         label = "Toggle Coords",
         type = "client",
         event = "ps-adminmenu:client:ToggleCoords",
-        perms = "mod",
-    },
-
-    ["toggle_blips"] = {
-        label = "Toggle Blips",
-        type = "client",
-        event = "ps-adminmenu:client:toggleBlips",
         perms = "mod",
     },
 
@@ -601,15 +495,8 @@ Config.Actions = {
         perms = "mod",
         dropdown = {
             { label = "Player",  option = "dropdown", data = "players" },
-            { label = "Confirm", option = "button",   type = "server", event = "ps-adminmenu:server:CuffPlayer" },
+            { label = "Confirm", option = "button",   type = "client", event = "ps-adminmenu:client:CuffPlayer" },
         },
-    },
-
-    ["max_mods"] = {
-        label = "Max Vehicle Mods",
-        type = "client",
-        event = "ps-adminmenu:client:maxmodVehicle",
-        perms = "mod",
     },
 
     ["warn_player"] = {
@@ -649,9 +536,18 @@ Config.Actions = {
                 label = "Sound",
                 option = "dropdown",
                 data = {
-                    { label = "Alert",      value = "alert" },
+                    { label = "Knock",      value = "knock" },
+                    { label = "Amongus",      value = "amongus" },
+                    { label = "Discord Disconnect",      value = "discord-disconnect" },
+                    { label = "Dramatic Fart",      value = "dramatic-fart" },
+                    { label = "Fart Reverb",      value = "fart-reverb" },
+                    { label = "Mario Fart",       value = "mario-fart" },
+                    { label = "Minecraft Creeper",       value = "minecraft-creeper" },
+                    { label = "Spongebob",       value = "spongebob" },
+                    { label = "Troll Laugh",       value = "troll-laugh" },
+                    { label = "Youre Gonna Die Clown",       value = "youre-gonna-die-clown" },
                     { label = "Cuff",       value = "cuff" },
-                    { label = "Air Wrench", value = "airwrench" },
+                    { label = "Rick Rock Roll", value = "rickrockroll" },
                 },
             },
             { label = "Play Sound", option = "button",   type = "client", event = "ps-adminmenu:client:PlaySound" },
@@ -677,12 +573,6 @@ Config.PlayerActions = {
         event = "ps-adminmenu:server:Revive",
         perms = "mod",
         type = "server"
-    },
-    ["spawnPersonalVehicle"] = {
-        label = "Spawn Personal Vehicle",
-        event = "ps-adminmenu:client:SpawnPersonalVehicle",
-        perms = "mod",
-        type = "client"
     },
     ["banPlayer"] = {
         label = "Ban Player",
@@ -711,11 +601,7 @@ AddEventHandler("onResourceStart", function()
     Wait(100)
     if GetResourceState('ox_inventory') == 'started' then
         Config.Inventory = 'ox_inventory'
-    elseif GetResourceState('ps-inventory') == 'started' then
-        Config.Inventory = 'ps-inventory'
-    elseif GetResourceState('lj-inventory') == 'started' then
-        Config.Inventory = 'lj-inventory'
-    elseif GetResourceState('qb-inventory') == 'started' then
-        Config.Inventory = 'qb-inventory'
+    elseif GetResourceState('rsg-inventory') == 'started' then
+        Config.Inventory = 'rsg-inventory'
     end
 end)
