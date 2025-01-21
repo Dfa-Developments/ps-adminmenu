@@ -3,12 +3,7 @@ RegisterNetEvent('ps-adminmenu:client:openInventory', function(data, selectedDat
     local data = CheckDataFromKey(data)
     if not data or not CheckPerms(data.perms) then return end
     local player = selectedData["Player"].value
-
-    if Config.Inventory == 'ox_inventory' then
-        TriggerServerEvent("ps-adminmenu:server:OpenInv", player)
-    else
-        TriggerServerEvent("inventory:server:OpenInventory", "otherplayer", player)
-    end
+    TriggerServerEvent("ps-adminmenu:server:OpenInv", player)
 end)
 
 -- Open Stash
@@ -16,25 +11,15 @@ RegisterNetEvent('ps-adminmenu:client:openStash', function(data, selectedData)
     local data = CheckDataFromKey(data)
     if not data or not CheckPerms(data.perms) then return end
     local stash = selectedData["Stash"].value
-
-    if Config.Inventory == 'ox_inventory' then
-        TriggerServerEvent("ps-adminmenu:server:OpenStash", stash)
-    else
-        TriggerServerEvent("inventory:server:OpenInventory", "stash", tostring(stash))
-        TriggerEvent("inventory:client:SetCurrentStash", tostring(stash))
-    end
+    TriggerServerEvent("ps-adminmenu:server:OpenStash", stash)
 end)
 
--- Open Trunk
-RegisterNetEvent('ps-adminmenu:client:openTrunk', function(data, selectedData)
+RegisterNetEvent('ps-adminmenu:client:ClearInventory', function(data, selectedData)
     local data = CheckDataFromKey(data)
     if not data or not CheckPerms(data.perms) then return end
-    local vehiclePlate = selectedData["Plate"].value
+    print('hiii')
+    local src = source
+    local player = selectedData["Player"].value
+    TriggerServerEvent("ps-adminmenu:server:ClearInventory", player)
 
-    if Config.Inventory == 'ox_inventory' then
-        TriggerServerEvent("ps-adminmenu:server:OpenTrunk", vehiclePlate)
-    else
-        TriggerServerEvent("inventory:server:OpenInventory", "trunk", tostring(vehiclePlate))
-        TriggerEvent("inventory:client:SetCurrentStash", tostring(vehiclePlate))
-    end
 end)

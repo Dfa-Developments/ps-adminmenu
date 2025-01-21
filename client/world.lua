@@ -5,8 +5,8 @@ RegisterNetEvent('ps-adminmenu:client:ChangeTime', function(data, selectedData)
     local time = selectedData["Time Events"].value
 
     if not time then return end
-
-    TriggerServerEvent('qb-weathersync:server:setTime', time, 00)
+    
+    TriggerServerEvent('weathersync:setTime', time, 00, 00, 00)
 end)
 
 -- Changes the weather
@@ -14,8 +14,7 @@ RegisterNetEvent('ps-adminmenu:client:ChangeWeather', function(data, selectedDat
     local data = CheckDataFromKey(data)
     if not data or not CheckPerms(data.perms) then return end
     local weather = selectedData["Weather"].value
-
-    TriggerServerEvent('qb-weathersync:server:setWeather', weather)
+    TriggerServerEvent('weathersync:setWeather', weather)
 end)
 
 RegisterNetEvent('ps-adminmenu:client:copyToClipboard', function(data, selectedData)
@@ -27,33 +26,36 @@ RegisterNetEvent('ps-adminmenu:client:copyToClipboard', function(data, selectedD
     local string = nil
     if dropdown == 'vector2' then
         local coords = GetEntityCoords(ped)
-        local x = QBCore.Shared.Round(coords.x, 2)
-        local y = QBCore.Shared.Round(coords.y, 2)
+        local x = RSGCore.Shared.Round(coords.x, 2)
+        local y = RSGCore.Shared.Round(coords.y, 2)
         string = "vector2(".. x ..", ".. y ..")"
-        QBCore.Functions.Notify(locale("copy_vector2"), 'success')
+        lib.notify({title = locale("copy_vector2"), type = 'success'})
     elseif dropdown == 'vector3' then
         local coords = GetEntityCoords(ped)
-        local x = QBCore.Shared.Round(coords.x, 2)
-        local y = QBCore.Shared.Round(coords.y, 2)
-        local z = QBCore.Shared.Round(coords.z, 2)
+        local x = RSGCore.Shared.Round(coords.x, 2)
+        local y = RSGCore.Shared.Round(coords.y, 2)
+        local z = RSGCore.Shared.Round(coords.z, 2)
         string = "vector3(".. x ..", ".. y ..", ".. z ..")"
-        QBCore.Functions.Notify(locale("copy_vector3"), 'success')
+        lib.notify({title = locale("copy_vector3"), type = 'success'})
+
     elseif dropdown == 'vector4' then
         local coords = GetEntityCoords(ped)
-        local x = QBCore.Shared.Round(coords.x, 2)
-        local y = QBCore.Shared.Round(coords.y, 2)
-        local z = QBCore.Shared.Round(coords.z, 2)
+        local x = RSGCore.Shared.Round(coords.x, 2)
+        local y = RSGCore.Shared.Round(coords.y, 2)
+        local z = RSGCore.Shared.Round(coords.z, 2)
         local heading = GetEntityHeading(ped)
-        local h = QBCore.Shared.Round(heading, 2)
+        local h = RSGCore.Shared.Round(heading, 2)
         string = "vector4(".. x ..", ".. y ..", ".. z ..", ".. h ..")"
-        QBCore.Functions.Notify(locale("copy_vector4"), 'success')
+        lib.notify({title = locale("copy_vector4"), type = 'success'})
+
     elseif dropdown == 'heading' then
         local heading = GetEntityHeading(ped)
-        local h = QBCore.Shared.Round(heading, 2)
+        local h = RSGCore.Shared.Round(heading, 2)
         string = h
-        QBCore.Functions.Notify(locale("copy_heading"), 'success')
+        lib.notify({title = locale("copy_heading"), type = 'success'})
+
     elseif string == nil then 
-        QBCore.Functions.Notify(locale("empty_input"), 'error')
+        lib.notify({title = locale("empty_input"), type = 'error'})
     end
 
     lib.setClipboard(string)

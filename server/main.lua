@@ -1,10 +1,10 @@
-QBCore = exports['qb-core']:GetCoreObject()
+RSGCore = exports['rsg-core']:GetCoreObject()
 
 lib.addCommand('admin', {
     help = 'Open the admin menu',
-    restricted = 'qbcore.mod'
+    restricted = 'RSGCore.mod'
 }, function(source)
-    if not QBCore.Functions.IsOptin(source) then TriggerClientEvent('QBCore:Notify', source, 'You are not on admin duty', 'error'); return end
+    if not RSGCore.Functions.IsOptin(source) then lib.notify(source, { title = 'You are not on admin duty', type = 'error', duration = 5000}); return end
     TriggerClientEvent('ps-adminmenu:client:OpenUI', source)
 end)
 -- Callbacks

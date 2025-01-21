@@ -1,24 +1,23 @@
 local lastCoords
 
 local function teleport(x, y, z)
-    if cache.vehicle then
-        return SetPedCoordsKeepVehicle(cache.ped, x, y, z)
-    end
-
-    SetEntityCoords(cache.ped, x, y, z, false, false, false, false)
+    -- if cache.vehicle then
+    --     return SetPedCoordsKeepVehicle(cache.ped, x, y, z)
+    -- end
+    SetEntityCoords(cache.ped, x, y, z) 
 end
 
 -- Teleport to player
 RegisterNetEvent('ps-adminmenu:client:TeleportToPlayer', function(coords)
     lastCoords = GetEntityCoords(cache.ped)
-    SetPedCoordsKeepVehicle(cache.ped, coords.x, coords.y, coords.z)
+    SetEntityCoords(cache.ped, coords.x, coords.y, coords.z) 
+    -- SetPedCoordsKeepVehicle(cache.ped, coords.x, coords.y, coords.z)
 end)
 
 -- Teleport to coords
 RegisterNetEvent('ps-adminmenu:client:TeleportToCoords', function(data, selectedData)
     local data = CheckDataFromKey(data)
     if not data or not CheckPerms(data.perms) then return end
-
     local coordsStr = selectedData["Coords"].value
     local x, y, z, heading
 
@@ -32,13 +31,12 @@ RegisterNetEvent('ps-adminmenu:client:TeleportToCoords', function(data, selected
     y = tonumber(y)
     z = tonumber(z or 0)
     heading = tonumber(heading or 0)
-
     if x and y then
         lastCoords = GetEntityCoords(cache.ped)
+        SetEntityCoords(cache.ped, x, y, z) 
         if heading and heading ~= 0 then
             SetEntityHeading(cache.ped, heading)
         end
-        SetPedCoordsKeepVehicle(cache.ped, x, y, z)
     end
 end)
 
@@ -47,9 +45,9 @@ RegisterNetEvent('ps-adminmenu:client:TeleportToLocation', function(data, select
     local data = CheckDataFromKey(data)
     if not data or not CheckPerms(data.perms) then return end
     local coords = selectedData["Location"].value
-
     lastCoords = GetEntityCoords(cache.ped)
-    SetPedCoordsKeepVehicle(cache.ped, coords.x, coords.y, coords.z)
+    SetEntityCoords(cache.ped, coords.x, coords.y, coords.z) 
+    -- SetPedCoordsKeepVehicle(cache.ped, coords.x, coords.y, coords.z)
 end)
 
 -- Teleport back

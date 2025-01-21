@@ -1,20 +1,20 @@
 local PedList = require "data.ped"
 
--- Returns a list of vehicles from QBCore.Shared.Vehicles
+-- Returns a list of vehicles from RSGCore.Shared.Vehicles
 local function GetVehicles()
     local vehicles = {}
 
-    for _, v in pairs(QBCore.Shared.Vehicles) do
+    for _, v in pairs(RSGCore.Shared.Vehicles) do
         vehicles[#vehicles + 1] = { label = v.name, value = v.model }
     end
 
     return vehicles
 end
 
--- Returns a list of items from QBCore.Shared.Items
+-- Returns a list of items from RSGCore.Shared.Items
 local function GetItems()
     local items = {}
-    local ItemsData = QBCore.Shared.Items
+    local ItemsData = RSGCore.Shared.Items
 
     if Config.Inventory == "ox_inventory" then
         ItemsData = exports.ox_inventory:Items()
@@ -27,11 +27,11 @@ local function GetItems()
     return items
 end
 
--- Returns a list of jobs from QBCore.Shared.Jobs
+-- Returns a list of jobs from RSGCore.Shared.Jobs
 local function GetJobs()
     local jobs = {}
 
-    for name, v in pairs(QBCore.Shared.Jobs) do
+    for name, v in pairs(RSGCore.Shared.Jobs) do
         local gradeDataList = {}
 
         for grade, gradeData in pairs(v.grades) do
@@ -44,11 +44,11 @@ local function GetJobs()
     return jobs
 end
 
--- Returns a list of gangs from QBCore.Shared.Gangs
+-- Returns a list of gangs from RSGCore.Shared.Gangs
 local function GetGangs()
     local gangs = {}
 
-    for name, v in pairs(QBCore.Shared.Gangs) do
+    for name, v in pairs(RSGCore.Shared.Gangs) do
         local gradeDataList = {}
 
         for grade, gradeData in pairs(v.grades) do
@@ -61,11 +61,11 @@ local function GetGangs()
     return gangs
 end
 
--- Returns a list of locations from QBCore.Shared.Loactions
+-- Returns a list of locations from RSGCore.Shared.Loactions
 local function GetLocations()
     local locations = {}
 
-    for name, v in pairs(QBCore.Shared.Locations) do
+    for name, v in pairs(RSGCore.Shared.Locations) do
         locations[#locations + 1] = { label = name, value = v }
     end
 

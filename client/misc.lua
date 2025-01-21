@@ -16,22 +16,36 @@ RegisterNetEvent('ps-adminmenu:client:ToggleGodmode', function(data)
     godmode = not godmode
 
     if godmode then
-        QBCore.Functions.Notify(locale("godmode", "enabled"), 'primary')
+        lib.notify({
+            title = locale("godmode", "enabled"),
+            type = "inform",
+            duration = 7500
+        })
         while godmode do
             Wait(0)
             SetPlayerInvincible(cache.playerId, true)
         end
         SetPlayerInvincible(cache.playerId, false)
-        QBCore.Functions.Notify(locale("godmode", "disabled"), 'primary')
+        lib.notify({
+            title = locale("godmode", "disabled"),
+            type = "inform",
+            duration = 7500
+        })
     end
 end)
 
 -- Cuff/Uncuff
-RegisterNetEvent('ps-adminmenu:client:ToggleCuffs', function(player)
-    local target = GetPlayerServerId(player)
-    TriggerEvent("police:client:GetCuffed", target)
-end)
+RegisterNetEvent('ps-adminmenu::ToggleCuffs', function(player)
 
+end)
+-- Toggle Cuffs
+RegisterNetEvent('ps-adminmenu:client:CuffPlayer', function(data, selectedData)
+    local data = CheckDataFromKey(data)
+    if not data or not CheckPerms(data.perms) then return end
+
+    local target = selectedData["Player"].value
+    TriggerEvent("rsg-lawman:client:getcuffed", target, false)
+end)
 -- Copy Coordinates
 local function CopyCoords(data)
     local coords = GetEntityCoords(cache.ped)
@@ -89,7 +103,7 @@ RegisterNetEvent('ps-adminmenu:client:setInfiniteAmmo', function(data)
     while InfiniteAmmo do
         SetPedInfiniteAmmo(cache.ped, true, cache.weapon)
         RefillAmmoInstantly(cache.ped)
-        Wait(250)
+        Wait(250)   
     end
 
     SetPedInfiniteAmmo(cache.ped, false, cache.weapon)
@@ -106,10 +120,10 @@ local function showCoordsMenu()
             action = "showCoordsMenu",
             data = {
                 show = showCoords,
-                x = QBCore.Shared.Round(coords.x, 2),
-                y = QBCore.Shared.Round(coords.y, 2),
-                z = QBCore.Shared.Round(coords.z, 2),
-                heading = QBCore.Shared.Round(heading, 2)
+                x = RSGCore.Shared.Round(coords.x, 2),
+                y = RSGCore.Shared.Round(coords.y, 2),
+                z = RSGCore.Shared.Round(coords.z, 2),
+                heading = RSGCore.Shared.Round(heading, 2)
             }
         })
     end
@@ -132,13 +146,12 @@ RegisterNetEvent('ps-adminmenu:client:SetAmmo', function(data, selectedData)
     if not data or not CheckPerms(data.perms) then return end
 
     local ammo = selectedData["Ammo Ammount"].value
-    local weapon = GetSelectedPedWeapon(cache.ped)
-
+    local weapon = GetPedCurrentHeldWeapon(cache.ped)
     if weapon ~= nil then
         SetPedAmmo(cache.ped, weapon, ammo)
-        QBCore.Functions.Notify(locale("set_wepaon_ammo", tostring(ammo)), 'success')
+        lib.notify({ title = locale("set_wepaon_ammo", tostring(ammo)), type = 'success', duration = 5000})
     else
-        QBCore.Functions.Notify(locale("no_weapon"), 'error')
+        lib.notify({ title = locale("no_weapon"), type = 'error', duration = 5000})
     end
 end)
 
@@ -148,9 +161,9 @@ RegisterCommand("setammo", function(source)
     local ammo = 999
     if weapon ~= nil then
         SetPedAmmo(cache.ped, weapon, ammo)
-        QBCore.Functions.Notify(locale("set_wepaon_ammo", tostring(ammo)), 'success')
+        lib.notify({ title = locale("set_wepaon_ammo", tostring(ammo)), type = 'success', duration = 5000})
     else
-        QBCore.Functions.Notify(locale("no_weapon"), 'error')
+        lib.notify({ title = locale("no_weapon"), type = 'error', duration = 5000})
     end
 end, false)
 
@@ -163,43 +176,31 @@ RegisterNetEvent('ps-adminmenu:client:ToggleDev', function(dataKey)
 
     ToggleDev = not ToggleDev
 
-    TriggerEvent("qb-admin:client:ToggleDevmode")              -- toggle dev mode (ps-hud/qb-hud)
+    -- TriggerEvent("rsg-admin:client:ToggleDevmode")              -- toggle dev mode (ps-hud/qb-hud)
     TriggerEvent('ps-adminmenu:client:ToggleCoords', dataKey)  -- toggle Coords
     TriggerEvent('ps-adminmenu:client:ToggleGodmode', dataKey) -- Godmode
 
-    QBCore.Functions.Notify(locale("toggle_dev"), 'success')
+    lib.notify({ title = locale("toggle_dev"), type = 'success', duration = 5000})
 end)
-
--- Key Bindings
-local toogleAdmin = lib.addKeybind({
-    name = 'toogleAdmin',
-    description = locale("command_admin_desc"),
-    defaultKey = Config.AdminKey,
-    onPressed = function(self)
-        ExecuteCommand('admin')
-    end
-})
 
 --noclip
 RegisterCommand('nc', function()
     TriggerEvent(Config.Actions["noclip"].event)
 end, false)
 
-local toogleNoclip = lib.addKeybind({
-    name = 'toogleNoclip',
-    description = locale("command_noclip_desc"),
-    defaultKey = Config.NoclipKey,
-    onPressed = function(self)
-        ExecuteCommand('nc')
-    end
-})
-
 if Config.Keybindings then
-    toogleAdmin:disable(false)
-    toogleNoclip:disable(false)
-else
-    toogleAdmin:disable(true)
-    toogleNoclip:disable(true)
+    CreateThread(function()
+        while true do
+            Wait(0)
+            if IsControlJustPressed(0, Config.AdminKey) then
+                ExecuteCommand('admin')
+            end
+            if IsControlJustPressed(0, Config.NoclipKey) then
+                ExecuteCommand('nc')
+            end
+        end
+    end)
+
 end
 
 -- Set Ped
