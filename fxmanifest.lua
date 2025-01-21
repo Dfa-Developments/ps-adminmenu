@@ -2,10 +2,10 @@ fx_version 'adamant'
 games {'rdr3'}
 rdr3_warning 'I acknowledge that this is a prerelease build of RedM, and I am aware my resources *will* become incompatible once RedM ships.'
 
-author "Project Sloth & OK1ez"
+author "Project Sloth RedM - DFA "
 version '1.1.6'
 description 'Admin Menu'
-repository 'https://github.com/Project-Sloth/ps-adminmenu'
+repository 'https://github.com/Dfa-Developments/ps-adminmenu'
 
 lua54 'yes'
 
