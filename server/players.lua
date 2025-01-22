@@ -17,7 +17,7 @@ local function getPlayers()
             dob = playerData.charinfo.birthdate,
             cash = playerData.money.cash,
             bank = playerData.money.bank,
-            phone = '03173889040',
+            phone = '123456789',
             vehicles = vehicles
         }
     end
